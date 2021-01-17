@@ -6,14 +6,14 @@
 </div>
 
 <div *ngIf="theme">
-  <div class="">
-    <app-playground [theme]="theme"></app-playground>
-
-    <div class="">
+  <div class="flex">
+    <div class="w-1/2 border-r-2 border-gray-500">
+      <app-playground [theme]="theme"></app-playground>
+    </div>
+    <div class="w-1/2">
       <app-landing [query]="theme.landingQuery" [stringTemplate]="theme.landingTemplate"></app-landing>
       <app-articles [query]="theme.articlesQuery" [stringTemplate]="theme.articlesTemplate"></app-articles>
       <app-article [query]="theme.articleQuery" [stringTemplate]="theme.articleTemplate"></app-article>
     </div>
-
   </div>
 </div>

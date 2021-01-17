@@ -1,38 +1,41 @@
-<div>
-  <h1>{{theme.name}} by <small>{{theme.author.username}}</small></h1>
-  <ul>
-    <li>
-      Querys
-      <ul>
-        <li (click)="setFile('landingQuery', 'graphql')">
-          landing.graphql
-        </li>
-        <li (click)="setFile('articlesQuery', 'graphql')">
-          articles.graphql
-        </li>
-        <li (click)="setFile('articleQuery', 'graphql')">
-          article.graphql
-        </li>
-      </ul>
-    </li>
+<div class="flex relative font-mono">
+  <button class="z-20 bg-red-500 absolute left-0 bottom-0 m-6 px-3 py-2 rounded-md font-bold text-white" (click)="saveTheme()">Save
+    theme</button>
+  <div class="relative w-64 p-6 bg-gray-900 text-white font-mono">
+    <h1 class="font-bold mb-12">{{theme.name}} by <small>{{theme.author.username}}</small></h1>
+    <div class="space-y-3">
+      <div>
+        <h4 class="my-6 font-bold">Querys</h4>
+        <div class=" space-y-3">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('landingQuery', 'graphql')">
+            landing<span class="text-orange-500">.graphql</span>
+          </div>
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articlesQuery', 'graphql')">
+            articles<span class="text-orange-500">.graphql</span>
+          </div>
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articleQuery', 'graphql')">
+            article<span class="text-orange-500">.graphql</span>
+          </div>
+        </div>
+      </div>
 
-    <li>
-      Templates
-      <ul>
-        <li (click)="setFile('landingTemplate', 'html')">
-          landing.html
-        </li>
-        <li (click)="setFile('articlesTemplate', 'html')">
-          articles.html
-        </li>
-        <li (click)="setFile('articleTemplate', 'html')">
-          article.html
-        </li>
-      </ul>
-    </li>
-  </ul>
+      <div class="mt-3">
+        <h4 class="my-12 mb-3 font-bold">Templates</h4>
+        <div class="space-y-3">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('landingTemplate', 'html')">
+            landing<span class="text-blue-500">.html</span>
+          </div>
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articlesTemplate', 'html')">
+            articles<span class="text-blue-500">.html</span>
+          </div>
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articleTemplate', 'html')">
+            article<span class="text-blue-500">.html</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full h-screen">
+    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  </div>
 </div>
-
-
-<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" ></ngx-monaco-editor>
-<button (click)="saveTheme()">Save theme</button>
