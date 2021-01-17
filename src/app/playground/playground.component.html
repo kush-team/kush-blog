@@ -1,8 +1,10 @@
-<div class="flex flex-col relative font-mono">
-  <button class="z-20 bg-red-500 absolute right-0 bottom-0 m-6 px-3 py-2 rounded-md font-bold text-white" (click)="saveTheme()">Save
-    theme</button>
+<div class="flex flex-col  font-mono">
+  <button
+    class="z-50 bg-red-500 absolute left-0 bottom-0 m-6  ml-12 transform -translate-y-8 px-3 py-2 rounded-md font-bold text-white"
+    (click)="saveTheme()">Save theme
+  </button>
   <div class="shadow-lg border-r-2 border-gray-600 left-0 top-0 bottom-0 absolute w-64 p-6 bg-gray-900 text-white font-mono z-40 transform duration-1000 transition-all -translate-x-56 hover:translate-x-0">
-    <div class="absolute right-0 top-0 transform translate-x-6 bg-orange-500 px-3 py-1 uppercase">
+    <div class="absolute right-0 top-0 transform translate-x-12 bg-orange-500 px-6 py-1 uppercase">
       Menu
     </div>
     <h1 class="font-bold mb-12">{{theme.name}} by <small>{{theme.author.username}}</small></h1>
@@ -10,35 +12,40 @@
       <div>
         <h4 class="my-6 font-bold">Querys</h4>
         <div class=" space-y-3">
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('landingQuery', 'graphql')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('landingQuery', 'graphql')">
             landing<span class="text-orange-500">.graphql</span>
           </div>
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articlesQuery', 'graphql')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('articlesQuery', 'graphql')">
             articles<span class="text-orange-500">.graphql</span>
           </div>
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articleQuery', 'graphql')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('articleQuery', 'graphql')">
             article<span class="text-orange-500">.graphql</span>
           </div>
         </div>
       </div>
-
       <div class="mt-3">
         <h4 class="my-12 mb-3 font-bold">Templates</h4>
         <div class="space-y-3">
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('landingTemplate', 'html')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('landingTemplate', 'html')">
             landing<span class="text-blue-500">.html</span>
           </div>
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articlesTemplate', 'html')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('articlesTemplate', 'html')">
             articles<span class="text-blue-500">.html</span>
           </div>
-          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer" (click)="setFile('articleTemplate', 'html')">
+          <div class="border-b-2 border-gray-700 hover:opacity-50 cursor-pointer"
+            (click)="setFile('articleTemplate', 'html')">
             article<span class="text-blue-500">.html</span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="w-full pl-6 h-screen">
+  <div class="w-full pt-8 bg-gray-900 border-t border-gray-700 pl-6 h-screen">
     <ngx-monaco-editor style="height: 100%; width: 100%;" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   </div>
 </div>
