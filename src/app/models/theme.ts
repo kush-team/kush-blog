@@ -56,7 +56,7 @@ export class Theme {
         break;
       }
       case 'landingQuery': {
-        return this.articleQuery;
+        return this.landingQuery;
       }
     }
     return "";
@@ -85,7 +85,7 @@ export class Theme {
         break;
       }
       case 'landingQuery': {
-         this.articleQuery = value;
+         this.landingQuery = value;
       }
     }
   }
