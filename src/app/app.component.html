@@ -1,28 +1,16 @@
 <div *ngIf="loading">
   <div class="fixed inset-0 text-white flex flex-col justify-center items-center bg-gray-900">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-full" viewBox="0 0 45 45" stroke="#fff">
-      <g fill="none" fill-rule="evenodd" transform="translate(1 1)" stroke-width="2">
-        <circle cx="22" cy="22" r="6" stroke-opacity="0">
-          <animate attributeName="r" begin="1.5s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />
-          <animate attributeName="stroke-opacity" begin="1.5s" dur="3s" values="1;0" calcMode="linear"
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-full mb-2" stroke="#fff" viewBox="0 0 38 38">
+      <g transform="translate(1 1)" stroke-width="2" fill="none" fill-rule="evenodd">
+        <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+        <path d="M36 18c0-9.94-8.06-18-18-18">
+          <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s"
             repeatCount="indefinite" />
-          <animate attributeName="stroke-width" begin="1.5s" dur="3s" values="2;0" calcMode="linear"
-            repeatCount="indefinite" />
-        </circle>
-        <circle cx="22" cy="22" r="6" stroke-opacity="0">
-          <animate attributeName="r" begin="3s" dur="3s" values="6;22" calcMode="linear" repeatCount="indefinite" />
-          <animate attributeName="stroke-opacity" begin="3s" dur="3s" values="1;0" calcMode="linear"
-            repeatCount="indefinite" />
-          <animate attributeName="stroke-width" begin="3s" dur="3s" values="2;0" calcMode="linear"
-            repeatCount="indefinite" />
-        </circle>
-        <circle cx="22" cy="22" r="8">
-          <animate attributeName="r" begin="0s" dur="1.5s" values="6;1;2;3;4;5;6" calcMode="linear"
-            repeatCount="indefinite" />
-        </circle>
+        </path>
       </g>
+      <style id="stylus-1" type="text/css"></style>
     </svg>
-    <span>Loading...</span>
+    <span class="font-mono font-bold">_loading</span>
   </div>
 </div>
 <div *ngIf="error">
@@ -32,15 +20,18 @@
 </div>
 
 <div *ngIf="theme" class="overflow-hidden relative max-h-screen">
-  <div class="relative flex items-center justify-between px-3 top-0 left-0 right-0 bg-gray-900 py-1 z-50 border-b border-gray-700">
-    <h3 class="font-mono w-64 flex justify-start items-center font-bold text-2xl text-white">
+  <div
+    class="relative flex items-center justify-between px-3 top-0 left-0 right-0 bg-gray-900 py-1 z-50 border-b border-gray-800">
+    <h3 class="font-mono flex justify-start items-center font-bold text-2xl text-white">
       Kush<span class="opacity-50">Team</span>
-      <span class="mx-3 bg-indigo-700 text-xs px-3 py-1 rounded-md">Dev</span>
+      <span class="mx-2 bg-indigo-700 text-sm px-2 py-1 rounded-md">.dev</span>
     </h3>
-    <a class="transform  top-0 right-0 translate-x-8 scale-75" target="_blank" rel="noopener noreferrer" href="https://www.buymeacoffee.com/kushteam"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kushteam&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
+    <a class="transform  top-0 right-0 translate-x-8 scale-75" target="_blank" rel="noopener noreferrer"
+      href="https://www.buymeacoffee.com/kushteam"><img
+        src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kushteam&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
   </div>
   <div class="flex overflow-hidden relative">
-    <div class="w-1/2 border-r-2 border-gray-500">
+    <div class="w-1/2 border-r-2 border-green-500">
       <app-playground [theme]="theme"></app-playground>
     </div>
     <div class="w-1/2 overflow-y-auto relative max-h-screen relative">
