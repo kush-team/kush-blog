@@ -25,6 +25,7 @@ export class AuthenticationService {
           id
           username
           emailAddress
+          role
         }
       }
     }

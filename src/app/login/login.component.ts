@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
               private storageService: StorageService) { }
 
   ngOnInit(): void {
-    console.log("PEPEPE");
     this.loginForm = this.formBuilder.group({
       emailAddress: ['', Validators.required],
       password: ['', Validators.required],
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
-    console.log("saraza");
     this.submitted = true;
     this.error = null;
 
@@ -43,7 +41,7 @@ export class LoginComponent implements OnInit {
 
 
   private correctLogin(data: any): void {
-    this.storageService.setCurrentSession(new Session(data.token, new User(data.user.id, data.user.fullName, data.user.emailAddress)));
+    this.storageService.setCurrentSession(new Session(data.token, new User(data.user.id, data.user.fullName, data.user.emailAddress, data.user.role)));
   }
 
 }
