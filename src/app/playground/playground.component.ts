@@ -39,10 +39,15 @@ export class PlaygroundComponent implements OnInit {
   }
 
 
+
+
   ngDoCheck() {
     const change = this.differ.diff(this);
     if (change) {
       change.forEachChangedItem(item => {
+        if (item.key == "theme") {
+          this.code = this.theme.getPropertyByName(this.key);
+        }
         if (item.key == "code") {
           this.theme.setPropertyByName(this.key, item.currentValue);
         }

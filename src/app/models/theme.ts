@@ -20,6 +20,7 @@ export class Theme {
     _theme.articleQuery = data.articleQuery;
     return _theme;
   }
+
   public id!:string;
   public name!: string;
   public author!: Author;
@@ -37,23 +38,18 @@ export class Theme {
     switch(key) {
       case 'landingTemplate': {
         return this.landingTemplate;
-        break;
       }
       case 'articlesTemplate': {
         return this.articlesTemplate;
-        break;
       }
       case 'articleTemplate': {
         return this.articleTemplate;
-        break;
       }
       case 'articlesQuery': {
         return this.articlesQuery;
-        break;
       }
       case 'articleQuery': {
         return this.articleQuery;
-        break;
       }
       case 'landingQuery': {
         return this.landingQuery;

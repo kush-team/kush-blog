@@ -31,7 +31,6 @@ export class ArticleComponent implements OnInit {
         }
       })
       .valueChanges.subscribe((result: any) => {
-        console.log(result);
         this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
         this.loading = result.loading;
         this.error = result.error;
