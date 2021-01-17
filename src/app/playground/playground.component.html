@@ -1,7 +1,10 @@
-<div class="flex relative font-mono">
-  <button class="z-20 bg-red-500 absolute left-0 bottom-0 m-6 px-3 py-2 rounded-md font-bold text-white" (click)="saveTheme()">Save
+<div class="flex flex-col relative font-mono">
+  <button class="z-20 bg-red-500 absolute right-0 bottom-0 m-6 px-3 py-2 rounded-md font-bold text-white" (click)="saveTheme()">Save
     theme</button>
-  <div class="relative w-64 p-6 bg-gray-900 text-white font-mono">
+  <div class="shadow-lg border-r-2 border-gray-600 left-0 top-0 bottom-0 absolute w-64 p-6 bg-gray-900 text-white font-mono z-40 transform duration-1000 transition-all -translate-x-56 hover:translate-x-0">
+    <div class="absolute right-0 top-0 transform translate-x-6 bg-orange-500 px-3 py-1 uppercase">
+      Menu
+    </div>
     <h1 class="font-bold mb-12">{{theme.name}} by <small>{{theme.author.username}}</small></h1>
     <div class="space-y-3">
       <div>
@@ -35,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="w-full h-screen">
-    <ngx-monaco-editor style="height: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  <div class="w-full pl-6 h-screen">
+    <ngx-monaco-editor style="height: 100%; width: 100%;" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   </div>
 </div>
