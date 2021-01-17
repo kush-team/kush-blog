@@ -32,7 +32,7 @@
 </div>
 
 <div *ngIf="theme" class="overflow-hidden relative max-h-screen">
-  <div class="relative flex items-center justify-between px-6 top-0 left-0 right-0 bg-gray-900 py-1 z-50">
+  <div class="relative flex items-center justify-between px-6 top-0 left-0 right-0 bg-gray-900 py-1 z-50 border-b border-gray-700">
     <h3 class="font-mono w-64 flex justify-start items-center font-bold text-2xl text-white">
       Kush<span class="opacity-50">Team</span>
       <span class="mx-3 bg-indigo-700 text-xs px-3 py-1 rounded-md">Dev</span>
@@ -42,7 +42,7 @@
     <div class="w-1/2 border-r-2 border-gray-500">
       <app-playground [theme]="theme"></app-playground>
     </div>
-    <div class="w-1/2 overflow-y-auto relative max-h-screen">
+    <div class="w-1/2 overflow-y-auto relative max-h-screen relative">
       <app-landing [query]="theme.landingQuery" [stringTemplate]="theme.landingTemplate"></app-landing>
       <app-articles [query]="theme.articlesQuery" [stringTemplate]="theme.articlesTemplate"></app-articles>
       <app-article [query]="theme.articleQuery" [stringTemplate]="theme.articleTemplate"></app-article>
