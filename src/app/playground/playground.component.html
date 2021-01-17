@@ -1,0 +1,38 @@
+<div>
+  <h1>{{theme.name}} by <small>{{theme.author.username}}</small></h1>
+  <ul>
+    <li>
+      Querys
+      <ul>
+        <li (click)="setFile('landingQuery', 'graphql')">
+          landing.graphql
+        </li>
+        <li (click)="setFile('articlesQuery', 'graphql')">
+          articles.graphql
+        </li>
+        <li (click)="setFile('articleQuery', 'graphql')">
+          article.graphql
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Templates
+      <ul>
+        <li (click)="setFile('landingTemplate', 'html')">
+          landing.html
+        </li>
+        <li (click)="setFile('articlesTemplate', 'html')">
+          articles.html
+        </li>
+        <li (click)="setFile('articleTemplate', 'html')">
+          article.html
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code" ></ngx-monaco-editor>
+<button (click)="saveTheme()">Save theme</button>

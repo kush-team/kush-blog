@@ -27,6 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              { "glob": "**/*", "input": "node_modules/ngx-monaco-editor/assets/monaco", "output": "./assets/monaco/" },
               "src/favicon.ico",
               "src/assets"
             ],
@@ -127,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "kush-blog"
+  "defaultProject": "kush-blog",
+  "cli": {
+    "analytics": "479d2010-a67b-4cb5-a697-3d42483a74b2"
+  }
 }
