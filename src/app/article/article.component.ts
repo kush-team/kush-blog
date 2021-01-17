@@ -1,3 +1,4 @@
+import { ArticlesService } from './../articles.service';
 import { Article } from './../models/article';
 import { Component, Input, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
@@ -17,29 +18,34 @@ export class ArticleComponent implements OnInit {
   public loading = true;
   public error: any;
 
-  constructor(private apollo: Apollo, private playground: PlaygroundService) { }
+  constructor(private apollo: Apollo, private playgroundService: PlaygroundService, private articlesService: ArticlesService) { }
 
   public setFile(key:string, language:string): void {
-    this.playground.setFile(key, language);
+    this.playgroundService.setFile(key, language);
   }
 
   ngOnInit() {
+    this.articlesService.articleChanged.subscribe(
+      (articleID:string) => {
+        console.log(articleID);
+        this.apollo
+          .watchQuery({
+            query: gql(this.query),
+            variables: {
+              id: articleID
+            }
+          })
+          .valueChanges.subscribe((result: any) => {
+            this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
+            this.loading = result.loading;
+            this.error = result.error;
+          });
+      }
+    );
   }
 
   ngOnChanges(): void {
 
-    this.apollo
-      .watchQuery({
-        query: gql(this.query),
-        variables: {
-          id: "c7fd9265-f5c0-4c34-9f4e-10405e582730"
-        }
-      })
-      .valueChanges.subscribe((result: any) => {
-        this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
-        this.loading = result.loading;
-        this.error = result.error;
-      });
   }
 
 }

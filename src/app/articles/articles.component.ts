@@ -1,3 +1,4 @@
+import { ArticlesService } from './../articles.service';
 import { Article } from './../models/article';
 import { Component, Input, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
@@ -17,10 +18,14 @@ export class ArticlesComponent implements OnInit {
   public loading = true;
   public error: any;
 
-  constructor(private apollo: Apollo, private playground: PlaygroundService) { }
+  constructor(private apollo: Apollo, private playgroundService: PlaygroundService, private articleService: ArticlesService) { }
 
   public setFile(key:string, language:string): void {
-    this.playground.setFile(key, language);
+    this.playgroundService.setFile(key, language);
+  }
+
+  public setArticle(articleID: string) : void {
+    this.articleService.setArticle(articleID);
   }
 
   ngOnChanges() {

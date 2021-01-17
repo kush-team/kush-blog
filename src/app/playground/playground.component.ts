@@ -31,12 +31,12 @@ export class PlaygroundComponent implements OnInit {
     }
   `;
 
-  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playground: PlaygroundService) {
+  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playgroundService: PlaygroundService) {
     this.differ = this.differs.find({}).create();
   }
 
   ngOnInit(): void {
-    this.playground.fileChanged.subscribe(
+    this.playgroundService.fileChanged.subscribe(
       (data:any) => {
         this.key = data.key;
         this.code = this.theme.getPropertyByName(this.key);
@@ -63,7 +63,7 @@ export class PlaygroundComponent implements OnInit {
   }
 
   public setFile(key:string, language:string): void {
-    this.playground.setFile(key, language);
+    this.playgroundService.setFile(key, language);
   }
 
   public saveTheme(): void {
