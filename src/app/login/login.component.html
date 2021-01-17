@@ -1,0 +1,42 @@
+<form id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="">
+  <input type="hidden" name="remember" value="true">
+  <div class="rounded-md shadow-sm">
+    <div class="relative">
+      <label for="email-address" class="sr-only">Email address</label>
+      <input matInput type="text" formControlName="emailAddress" placeholder="Email"
+        class="relative block w-full px-3 py-3 text-gray-900 placeholder-gray-900 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" />
+      <div
+        *ngIf="loginForm.controls['emailAddress'].invalid && (loginForm.controls['emailAddress'].dirty || loginForm.controls['emailAddress'].touched)"
+        class="alert">
+        <div class="absolute top-0 right-0 py-4 pr-4 text-xs font-bold text-red-500"
+          *ngIf="loginForm.controls['emailAddress'].errors.required">
+          Falta ingresar email
+        </div>
+      </div>
+    </div>
+    <div class="relative">
+      <label for="password" class="sr-only">Password</label>
+      <input matInput type="password" formControlName="password" autocomplete="current-password" required
+        class="relative block w-full px-3 py-3 text-gray-900 placeholder-gray-900 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+        placeholder="Contraseña">
+      <div
+        *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)"
+        class="alert">
+        <div class="absolute top-0 right-0 py-4 pr-4 text-xs font-bold text-red-500"
+          *ngIf="loginForm.controls['password'].errors.required">
+          Falta Ingresar contraseña
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="mt-2">
+    <button mat-raised-button type="submit" form="login-form" [disabled]="!loginForm.valid"
+      class="relative flex justify-center w-full px-4 py-2 text-base font-bold text-white uppercase bg-blue-600 border border-transparent rounded-md group hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+      Sign in
+    </button>
+  </div>
+  <p class="pt-6 font-mono text-center text-blue-100 opacity-25">
+    V.0.3
+  </p>
+</form>

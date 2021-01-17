@@ -1,3 +1,4 @@
+import { StorageService } from './storage.service';
 import { Component, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
 import { Theme } from './models/theme';
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit {
 
   public theme!: Theme;
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo, public storageService:StorageService) {}
 
   ngOnInit() {
 

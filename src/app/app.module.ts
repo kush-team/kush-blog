@@ -7,11 +7,13 @@ import { PlaygroundComponent } from './playground/playground.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { LandingComponent } from './landing/landing.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphQLModule } from './graphql.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ArticleComponent } from './article/article.component';
 import { CompileDirective } from './compile.directive';
+import { AuthInterceptor } from './auth.interceptor';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { CompileDirective } from './compile.directive';
     ArticlesComponent,
     LandingComponent,
     ArticleComponent,
-    CompileDirective
+    CompileDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +31,17 @@ import { CompileDirective } from './compile.directive';
     FormsModule,
     MonacoEditorModule.forRoot(),
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 

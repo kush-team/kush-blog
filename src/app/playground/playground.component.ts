@@ -3,6 +3,7 @@ import { Component, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angu
 import { Apollo, gql } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import { Theme } from '../models/theme';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-playground',
@@ -31,7 +32,7 @@ export class PlaygroundComponent implements OnInit {
     }
   `;
 
-  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playgroundService: PlaygroundService) {
+  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playgroundService: PlaygroundService, public storageService:StorageService) {
     this.differ = this.differs.find({}).create();
   }
 

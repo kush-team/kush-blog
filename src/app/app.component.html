@@ -26,12 +26,14 @@
       Kush<span class="opacity-50">Team</span>
       <span class="mx-2 bg-indigo-700 text-sm px-2 py-1 rounded-md">.dev</span>
     </h3>
+    <a *ngIf="storageService.isAuthenticated()" (click)="storageService.logout()">Logout </a>
     <a class="transform  top-0 right-0 translate-x-8 scale-75" target="_blank" rel="noopener noreferrer"
       href="https://www.buymeacoffee.com/kushteam"><img
         src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kushteam&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
   </div>
   <div class="flex overflow-hidden relative">
     <div class="w-1/2 border-r-2 border-green-500">
+      <app-login *ngIf="!storageService.isAuthenticated()"></app-login>
       <app-playground [theme]="theme"></app-playground>
     </div>
     <div class="w-1/2 overflow-y-auto relative max-h-screen relative">

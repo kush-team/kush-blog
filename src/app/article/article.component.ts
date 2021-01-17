@@ -18,6 +18,9 @@ export class ArticleComponent implements OnInit {
   public loading = true;
   public error: any;
 
+  private articleID:string;
+
+
   constructor(private apollo: Apollo, private playgroundService: PlaygroundService, private articlesService: ArticlesService) { }
 
   public setFile(key:string, language:string): void {
@@ -27,25 +30,31 @@ export class ArticleComponent implements OnInit {
   ngOnInit() {
     this.articlesService.articleChanged.subscribe(
       (articleID:string) => {
-        console.log(articleID);
-        this.apollo
-          .watchQuery({
-            query: gql(this.query),
-            variables: {
-              id: articleID
-            }
-          })
-          .valueChanges.subscribe((result: any) => {
-            this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
-            this.loading = result.loading;
-            this.error = result.error;
-          });
+        this.articleID = articleID;
+        this.getArticle();
       }
     );
   }
 
   ngOnChanges(): void {
+    if (this.articleID) {
+      this.getArticle();
+    }
+  }
 
+  private getArticle(): void {
+    this.apollo
+      .watchQuery({
+        query: gql(this.query),
+        variables: {
+          id: this.articleID
+        }
+      })
+      .valueChanges.subscribe((result: any) => {
+        this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
+        this.loading = result.loading;
+        this.error = result.error;
+      });
   }
 
 }
