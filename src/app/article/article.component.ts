@@ -26,8 +26,12 @@ export class ArticleComponent implements OnInit {
     this.apollo
       .watchQuery({
         query: gql(this.query),
+        variables: {
+          id: "c7fd9265-f5c0-4c34-9f4e-10405e582730"
+        }
       })
       .valueChanges.subscribe((result: any) => {
+        console.log(result);
         this.article = Article.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
         this.loading = result.loading;
         this.error = result.error;

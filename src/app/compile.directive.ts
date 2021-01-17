@@ -6,7 +6,7 @@ import { Compiler, Component, ComponentRef, CUSTOM_ELEMENTS_SCHEMA, Directive, I
 })
 
 export class CompileDirective implements OnChanges {
-  @Input() compile!: string;
+  @Input() compile: string = "";
   @Input() compileContext: any;
 
   public compRef!: ComponentRef<any>;
@@ -56,11 +56,9 @@ export class CompileDirective implements OnChanges {
     return CustomDynamicComponent;
   }
 
+
   private createDynamicModule (component: Type<any>) {
     @NgModule({
-      // You might need other modules, providers, etc...
-      // Note that whatever components you want to be able
-      // to render dynamically must be known to this module
       imports: [CommonModule],
       declarations: [component],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

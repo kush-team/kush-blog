@@ -53,7 +53,7 @@ export class PlaygroundComponent implements OnInit {
   public setFile(key:string, language:string): void {
     this.key = key;
     this.code = this.theme.getPropertyByName(this.key);
-    this.editorOptions.language = language;
+    this.editorOptions = {theme: 'vs-dark', language: language};
   }
 
   public saveTheme(): void {
