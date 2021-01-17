@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PlaygroundService } from '../playground.service';
 
 @Component({
   selector: 'app-landing',
@@ -10,9 +11,12 @@ export class LandingComponent implements OnInit {
   @Input() stringTemplate!:string;
   @Input() query!:string;
 
-  constructor() { }
+  constructor(private playground: PlaygroundService) { }
 
   ngOnInit(): void {
   }
 
+  public setFile(key:string, language:string): void {
+    this.playground.setFile(key, language);
+  }
 }

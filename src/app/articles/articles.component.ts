@@ -1,6 +1,7 @@
 import { Article } from './../models/article';
 import { Component, Input, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
+import { PlaygroundService } from '../playground.service';
 
 @Component({
   selector: 'app-articles',
@@ -16,7 +17,11 @@ export class ArticlesComponent implements OnInit {
   public loading = true;
   public error: any;
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private playground: PlaygroundService) { }
+
+  public setFile(key:string, language:string): void {
+    this.playground.setFile(key, language);
+  }
 
   ngOnChanges() {
     this.apollo

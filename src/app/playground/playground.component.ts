@@ -1,3 +1,4 @@
+import { PlaygroundService } from './../playground.service';
 import { Component, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
@@ -30,12 +31,18 @@ export class PlaygroundComponent implements OnInit {
     }
   `;
 
-  constructor(private differs: KeyValueDiffers, private apollo: Apollo) {
+  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playground: PlaygroundService) {
     this.differ = this.differs.find({}).create();
   }
 
   ngOnInit(): void {
-
+    this.playground.fileChanged.subscribe(
+      (data:any) => {
+        this.key = data.key;
+        this.code = this.theme.getPropertyByName(this.key);
+        this.editorOptions = {theme: 'vs-dark', language: data.language};
+      }
+    );
   }
 
 
@@ -56,9 +63,7 @@ export class PlaygroundComponent implements OnInit {
   }
 
   public setFile(key:string, language:string): void {
-    this.key = key;
-    this.code = this.theme.getPropertyByName(this.key);
-    this.editorOptions = {theme: 'vs-dark', language: language};
+    this.playground.setFile(key, language);
   }
 
   public saveTheme(): void {

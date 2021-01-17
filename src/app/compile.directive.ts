@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Compiler, Component, ComponentRef, CUSTOM_ELEMENTS_SCHEMA, Directive, Input, ModuleWithComponentFactories, NgModule, OnChanges, Type, ViewContainerRef } from "@angular/core";
+import { PlaygroundService } from "./playground.service";
 
 @Directive({
   selector: '[compile]'
@@ -52,7 +53,9 @@ export class CompileDirective implements OnChanges {
       selector: 'custom-dynamic-component',
       template: template,
     })
-    class CustomDynamicComponent {}
+    class CustomDynamicComponent {
+      constructor(private playground: PlaygroundService) {}
+    }
     return CustomDynamicComponent;
   }
 
@@ -61,7 +64,8 @@ export class CompileDirective implements OnChanges {
     @NgModule({
       imports: [CommonModule],
       declarations: [component],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      providers: [PlaygroundService]
     })
     class DynamicModule {}
     return DynamicModule;
