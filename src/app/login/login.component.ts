@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
               private storageService: StorageService) { }
 
   ngOnInit(): void {
+    console.log("PEPEPE");
     this.loginForm = this.formBuilder.group({
       emailAddress: ['', Validators.required],
       password: ['', Validators.required],
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login(): void {
+    console.log("saraza");
     this.submitted = true;
     this.error = null;
 
