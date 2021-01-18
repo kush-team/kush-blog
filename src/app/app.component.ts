@@ -109,8 +109,13 @@ export class AppComponent implements OnInit {
         query: gql(this.allThemesQuery),
       })
       .valueChanges.subscribe((result: any) => {
+
         this.themeList = (result?.data[Object.keys(result?.data)[0]].dataList).map((theme:any) => { return Theme.CopyFrom(theme)}) ;
-        this.theme = this.themeList[0];
+
+        if (!this.theme) {
+          this.theme = this.themeList[0];
+        }
+
         this.loading = result.loading;
         this.error = result.error;
       });

@@ -97,8 +97,10 @@ export class PlaygroundComponent implements OnInit {
   }
 
   public themeSelected(): void {
-    this.theme = this.themes.filter(t => t.id === this.themeID)[0];
-    this.themeService.setTheme(this.theme);
+    if (this.theme.id != this.themeID) {
+      let theme = this.themes.filter(t => t.id === this.themeID)[0];
+      this.themeService.setTheme(theme);
+    }
   }
 
   public saveTheme(): void {
