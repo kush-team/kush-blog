@@ -13,11 +13,14 @@ import { StorageService } from '../storage.service';
 
 export class PlaygroundComponent implements OnInit {
   @Input() theme!:Theme;
+  @Input() themes!:Theme[];
+
   public code!:string;
   private differ: KeyValueDiffer<string, any>;
 
   public editorOptions = {theme: 'vs-dark', language: 'graphql'};
   private key:string = "";
+  public themeID: string;
 
   private UPDATE_THEME:DocumentNode = gql`
     mutation UpdateTheme($id: ID!, $theme: ThemeInput!) {
@@ -32,11 +35,31 @@ export class PlaygroundComponent implements OnInit {
     }
   `;
 
+  private CREATE_THEME:DocumentNode = gql`
+    mutation CreateTheme($theme: ThemeInput!) {
+      CreateTheme(Theme: $theme) {
+        message
+        status
+        data {
+          id
+          name
+          landingQuery
+          landingTemplate
+          articleQuery
+          articleTemplate
+          articlesQuery
+          articlesTemplate
+        }
+      }
+    }
+  `;
+
   constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playgroundService: PlaygroundService, public storageService:StorageService) {
     this.differ = this.differs.find({}).create();
   }
 
   ngOnInit(): void {
+    this.themeID = this.theme.id;
     this.playgroundService.fileChanged.subscribe(
       (data:any) => {
         this.key = data.key;
@@ -54,6 +77,7 @@ export class PlaygroundComponent implements OnInit {
     if (change) {
       change.forEachChangedItem(item => {
         if (item.key == "theme") {
+          this.themeID = this.theme.id;
           this.code = this.theme.getPropertyByName(this.key);
         }
         if (item.key == "code") {
@@ -65,6 +89,10 @@ export class PlaygroundComponent implements OnInit {
 
   public setFile(key:string, language:string): void {
     this.playgroundService.setFile(key, language);
+  }
+
+  public themeSelected(): void {
+    this.theme = this.themes.filter(t => t.id === this.themeID)[0];
   }
 
   public saveTheme(): void {
@@ -87,6 +115,31 @@ export class PlaygroundComponent implements OnInit {
       }
     }).subscribe(({ data }) => {
       //console.log('got data', data);
+    },(error) => {
+      //console.log('there was an error sending the query', error);
+    });
+  }
+
+  public cloneTheme(): void {
+    let theme = {
+      name : prompt("Please enter theme name", `${this.theme.name} cloned`),
+      landingTemplate : this.theme.landingTemplate,
+      landingQuery : this.theme.landingQuery,
+      articlesTemplate : this.theme.articlesTemplate,
+      articlesQuery : this.theme.articlesQuery,
+      articleTemplate : this.theme.articleTemplate,
+      articleQuery : this.theme.articleQuery,
+      authorID: this.storageService.getCurrentUser().id
+    };
+
+    this.apollo.mutate({
+      mutation: this.CREATE_THEME,
+      variables: {
+        theme: theme
+      }
+    }).subscribe((data:any) => {
+      this.theme = Theme.CopyFrom(data.data.CreateTheme.data);
+      this.themes.push(this.theme);
     },(error) => {
       //console.log('there was an error sending the query', error);
     });

@@ -37,10 +37,33 @@ export class AppComponent implements OnInit {
     }
   }
 `
+  private allThemesQuery:string = `
+    query getAllThemes{
+      GetAllThemes {
+        dataList {
+          id
+          name
+          landingQuery
+          landingTemplate
+          articleQuery
+          articleTemplate
+          articlesQuery
+          articlesTemplate
+          author {
+            id
+            username
+            emailAddress
+          }
+        }
+    }
+}
+`
 
 
 
   public theme!: Theme;
+
+  public themeList!: Theme[];
 
   constructor(private apollo: Apollo, public storageService:StorageService) {}
 
@@ -61,20 +84,26 @@ export class AppComponent implements OnInit {
                 }
             }`
     }).subscribe((resp:any) => {
-      this.theme.articleQuery = resp?.data?.themeChanged?.articleQuery;
-      this.theme.articleTemplate = resp?.data?.themeChanged?.articleTemplate;
-      this.theme.articlesQuery = resp?.data?.themeChanged?.articlesQuery;
-      this.theme.articlesTemplate = resp?.data?.themeChanged?.articlesTemplate;
-      this.theme.landingQuery = resp?.data?.themeChanged?.landingQuery;
-      this.theme.landingTemplate = resp?.data?.themeChanged?.landingTemplate;
+      let themeToUpdate:Theme = this.themeList.filter(t => t.id === resp?.data?.themeChanged?.id)[0];
+
+      if (themeToUpdate) {
+        themeToUpdate.articleQuery = resp?.data?.themeChanged?.articleQuery;
+        themeToUpdate.articleTemplate = resp?.data?.themeChanged?.articleTemplate;
+        themeToUpdate.articlesQuery = resp?.data?.themeChanged?.articlesQuery;
+        themeToUpdate.articlesTemplate = resp?.data?.themeChanged?.articlesTemplate;
+        themeToUpdate.landingQuery = resp?.data?.themeChanged?.landingQuery;
+        themeToUpdate.landingTemplate = resp?.data?.themeChanged?.landingTemplate;
+      }
     });
+
 
     this.apollo
       .watchQuery({
-        query: gql(this.gqlTest),
+        query: gql(this.allThemesQuery),
       })
       .valueChanges.subscribe((result: any) => {
-        this.theme = Theme.CopyFrom(result?.data[Object.keys(result?.data)[0]].data);
+        this.themeList = (result?.data[Object.keys(result?.data)[0]].dataList).map((theme:any) => { return Theme.CopyFrom(theme)}) ;
+        this.theme = this.themeList[0];
         this.loading = result.loading;
         this.error = result.error;
       });
