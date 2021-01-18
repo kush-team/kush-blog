@@ -1,3 +1,4 @@
+import { ThemeService } from './theme.service';
 import { StorageService } from './storage.service';
 import { Component, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
@@ -65,9 +66,15 @@ export class AppComponent implements OnInit {
 
   public themeList!: Theme[];
 
-  constructor(private apollo: Apollo, public storageService:StorageService) {}
+  constructor(private apollo: Apollo, public storageService:StorageService, private themeService:ThemeService) {}
 
   ngOnInit() {
+
+    this.themeService.themeChanged.subscribe(
+      (theme:Theme) => {
+        this.theme = theme;
+      }
+    );
 
     this.apollo.subscribe({
             query: gql`

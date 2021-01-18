@@ -4,6 +4,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import { Theme } from '../models/theme';
 import { StorageService } from '../storage.service';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-playground',
@@ -54,8 +55,13 @@ export class PlaygroundComponent implements OnInit {
     }
   `;
 
-  constructor(private differs: KeyValueDiffers, private apollo: Apollo, private playgroundService: PlaygroundService, public storageService:StorageService) {
-    this.differ = this.differs.find({}).create();
+  constructor(
+    private differs: KeyValueDiffers,
+    private apollo: Apollo,
+    private playgroundService: PlaygroundService,
+    public storageService:StorageService,
+    private themeService:ThemeService) {
+      this.differ = this.differs.find({}).create();
   }
 
   ngOnInit(): void {
@@ -77,7 +83,6 @@ export class PlaygroundComponent implements OnInit {
     if (change) {
       change.forEachChangedItem(item => {
         if (item.key == "theme") {
-          this.themeID = this.theme.id;
           this.code = this.theme.getPropertyByName(this.key);
         }
         if (item.key == "code") {
@@ -93,6 +98,7 @@ export class PlaygroundComponent implements OnInit {
 
   public themeSelected(): void {
     this.theme = this.themes.filter(t => t.id === this.themeID)[0];
+    this.themeService.setTheme(this.theme);
   }
 
   public saveTheme(): void {
