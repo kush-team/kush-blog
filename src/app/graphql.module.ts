@@ -12,12 +12,12 @@ import {getMainDefinition} from '@apollo/client/utilities';
       useFactory(httpLink: HttpLink): ApolloClientOptions<any> {
         // Create an http link:
         const http = httpLink.create({
-          uri: 'https://fe7dd51637c9.ngrok.io/graphql',
+          uri: 'https://kush-team.dev/graphql',
         });
 
         // Create a WebSocket link:
         const ws = new WebSocketLink({
-          uri: `wss://fe7dd51637c9.ngrok.io/graphql`,
+          uri: `wss://kush-team.dev/graphql`,
           options: {
             reconnect: true,
           },
