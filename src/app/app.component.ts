@@ -1,6 +1,6 @@
 import { ThemeService } from './theme.service';
 import { StorageService } from './storage.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import {Apollo, gql} from 'apollo-angular';
 import { Theme } from './models/theme';
 
@@ -67,6 +67,10 @@ export class AppComponent implements OnInit {
   public themeList!: Theme[];
 
   constructor(private apollo: Apollo, public storageService:StorageService, private themeService:ThemeService) {}
+
+  public splitResize(event: any) : void {
+    window.dispatchEvent(new Event('resize'));
+  }
 
   ngOnInit() {
 

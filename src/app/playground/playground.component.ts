@@ -1,5 +1,5 @@
 import { PlaygroundService } from './../playground.service';
-import { Component, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { DocumentNode } from 'graphql';
 import { Theme } from '../models/theme';
