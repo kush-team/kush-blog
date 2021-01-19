@@ -11,12 +11,12 @@ export class LandingComponent implements OnInit {
   @Input() stringTemplate!:string;
   @Input() query!:string;
 
-  constructor(private playground: PlaygroundService) { }
+  constructor(private playgroundService: PlaygroundService) { }
 
   ngOnInit(): void {
   }
 
   public setFile(key:string, language:string): void {
-    this.playground.setFile(key, language);
+    this.playgroundService.setFile(key, language);
   }
 }
