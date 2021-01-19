@@ -16,10 +16,10 @@ export class PlaygroundComponent implements OnInit {
   @Input() theme!:Theme;
   @Input() themes!:Theme[];
 
-  public code!:string;
+  public code:string = "import { Component, OnInit } from '@angular/core';\n\n@Component({\n\tselector: 'app-article',\n\ttemplateUrl: './hellowornd.component.html',\n\tstyleUrls: ['./hellowornd.component.scss']\n})\n\nexport class HelloWordComponent implements OnInit {\n\t\n\tconstructor() { }\n\n\tngOnInit() {\n\t\tconsole.log('Hello Word!')\n\t}\n}\n";
   private differ: KeyValueDiffer<string, any>;
 
-  public editorOptions = {theme: 'vs-dark', language: 'graphql'};
+  public editorOptions = {theme: 'vs-dark', language: 'typescript'};
   private key:string = "";
   public themeID: string;
 
