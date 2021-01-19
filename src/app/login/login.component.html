@@ -1,14 +1,14 @@
-<form  id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="w-full max-w-sm">
-  <div class="flex items-center border-b border-b-2 border-green-800 py-2">
+<form  id="login-form" #lForm="ngForm" [formGroup]="loginForm" (ngSubmit)="login()" novalidate class="w-full text-white ">
+  <div class="flex items-center py-2">
     <input matInput type="text" formControlName="emailAddress" placeholder="Email"
-      class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+      class="appearance-none placeholder-opacity-50 border-b-2 border-green-500 text-white bg-transparent w-full  mr-3 py-1 px-2 leading-tight focus:outline-none"
     >
     <input matInput type="password" formControlName="password" autocomplete="current-password" required
-      class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+      class="appearance-none placeholder-opacity-50 border-b-2 border-green-500 text-white bg-transparent w-full  mr-3 py-1 px-2 leading-tight focus:outline-none"
       placeholder="Password">
 
     <button mat-raised-button type="submit" form="login-form" [disabled]="!loginForm.valid"
-      class="flex-shrink-0 bg-green-800 hover:bg-green-700 border-green-800 hover:border-green-700 text-sm border-4 text-white py-1 px-2 rounded">
+      class="flex-shrink-0 bg-green-500 hover:bg-green-700 text-sm text-white py-1 px-2 rounded">
       Sign In
     </button>
   </div>
