@@ -33,14 +33,16 @@
     <a class="text-white cursor-pointer hover:opacity-50 font-bold" *ngIf="storageService.isAuthenticated()"
       (click)="storageService.logout()">Logout </a>
   </div>
-  <div class="flex overflow-hidden relative">
-    <div class="w-1/2 border-r-2 border-green-500">
-      <app-playground [theme]="theme" [themes]="themeList"></app-playground>
-    </div>
-    <div class="w-1/2 overflow-y-auto relative max-h-screen relative">
-      <app-landing [query]="theme.landingQuery" [stringTemplate]="theme.landingTemplate"></app-landing>
-      <app-articles [query]="theme.articlesQuery" [stringTemplate]="theme.articlesTemplate"></app-articles>
-      <app-article [query]="theme.articleQuery" [stringTemplate]="theme.articleTemplate"></app-article>
-    </div>
+  <div class="flex w-full h-screen overflow-hidden relative">
+    <as-split direction="horizontal">
+      <as-split-area [size]="40">
+        <app-playground [theme]="theme" [themes]="themeList"></app-playground>
+      </as-split-area>
+      <as-split-area [size]="60">
+        <app-landing [query]="theme.landingQuery" [stringTemplate]="theme.landingTemplate"></app-landing>
+        <app-articles [query]="theme.articlesQuery" [stringTemplate]="theme.articlesTemplate"></app-articles>
+        <app-article [query]="theme.articleQuery" [stringTemplate]="theme.articleTemplate"></app-article>
+      </as-split-area>
+    </as-split>
   </div>
 </div>
