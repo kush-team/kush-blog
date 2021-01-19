@@ -34,7 +34,7 @@
       (click)="storageService.logout()">Logout </a>
   </div>
   <div class="flex w-full h-screen overflow-hidden relative">
-    <as-split direction="horizontal" (dragEnd) = "splitResize($event)">
+    <as-split direction="horizontal" (dragEnd) = "splitResize($event)" gutterSize=4>
       <as-split-area [size]="40">
         <app-playground [theme]="theme" [themes]="themeList"></app-playground>
       </as-split-area>

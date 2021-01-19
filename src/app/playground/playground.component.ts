@@ -1,3 +1,4 @@
+import { Author } from './../models/author';
 import { PlaygroundService } from './../playground.service';
 import { Component, EventEmitter, Input, KeyValueDiffer, KeyValueDiffers, OnInit } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
@@ -50,6 +51,11 @@ export class PlaygroundComponent implements OnInit {
           articleTemplate
           articlesQuery
           articlesTemplate
+          author {
+            id
+            username
+            emailAddress
+          }
         }
       }
     }
@@ -146,8 +152,10 @@ export class PlaygroundComponent implements OnInit {
         theme: theme
       }
     }).subscribe((data:any) => {
-      this.theme = Theme.CopyFrom(data.data.CreateTheme.data);
-      this.themes.push(this.theme);
+      let cloneTheme:Theme = Theme.CopyFrom(data.data.CreateTheme.data);
+      this.themeID = cloneTheme.id;
+      this.themes.push(cloneTheme);
+      this.themeService.setTheme(cloneTheme);
     },(error) => {
       //console.log('there was an error sending the query', error);
     });
