@@ -1,15 +1,14 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {Session} from "./models/session";
-import {User} from "./models/user";
+import { Session } from './models/session';
+import { User } from './models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
   private localStorageService;
-  private currentSession : Session = null;
+  private currentSession: Session = null;
 
   constructor(private router: Router) {
     this.localStorageService = localStorage;
@@ -21,9 +20,9 @@ export class StorageService {
     this.localStorageService.setItem('currentUser', JSON.stringify(session));
   }
 
-  loadSessionData(): Session{
+  loadSessionData(): Session {
     var sessionStr = this.localStorageService.getItem('currentUser');
-    return (sessionStr) ? <Session> JSON.parse(sessionStr) : null;
+    return sessionStr ? <Session>JSON.parse(sessionStr) : null;
   }
 
   getCurrentSession(): Session {
@@ -37,20 +36,19 @@ export class StorageService {
 
   getCurrentUser(): User {
     var session: Session = this.getCurrentSession();
-    return (session && session.user) ? session.user : null;
-  };
+    return session && session.user ? session.user : null;
+  }
 
   isAuthenticated(): boolean {
-    return (this.getCurrentToken() != null) ? true : false;
-  };
+    return this.getCurrentToken() != null ? true : false;
+  }
 
   getCurrentToken(): string {
     var session = this.getCurrentSession();
-    return (session && session.token) ? session.token : null;
-  };
-
-  logout(): void{
-    this.removeCurrentSession();
+    return session && session.token ? session.token : null;
   }
 
+  logout(): void {
+    this.removeCurrentSession();
+  }
 }

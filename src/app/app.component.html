@@ -1,11 +1,29 @@
 <div *ngIf="loading">
-  <div class="fixed inset-0 text-white flex flex-col justify-center items-center bg-gray-900">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-full mb-2" stroke="#fff" viewBox="0 0 38 38">
-      <g transform="translate(1 1)" stroke-width="2" fill="none" fill-rule="evenodd">
+  <div
+    class="fixed inset-0 text-white flex flex-col justify-center items-center bg-gray-900"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-12 w-full mb-2"
+      stroke="#fff"
+      viewBox="0 0 38 38"
+    >
+      <g
+        transform="translate(1 1)"
+        stroke-width="2"
+        fill="none"
+        fill-rule="evenodd"
+      >
         <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
         <path d="M36 18c0-9.94-8.06-18-18-18">
-          <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s"
-            repeatCount="indefinite" />
+          <animateTransform
+            attributeName="transform"
+            type="rotate"
+            from="0 18 18"
+            to="360 18 18"
+            dur="1s"
+            repeatCount="indefinite"
+          />
         </path>
       </g>
       <style id="stylus-1" type="text/css"></style>
@@ -14,34 +32,57 @@
   </div>
 </div>
 <div *ngIf="error">
-  <div class="fixed inset-0 text-white flex flex-col justify-center items-center bg-gray-900">
+  <div
+    class="fixed inset-0 text-white flex flex-col justify-center items-center bg-gray-900"
+  >
     <span>Error :(</span>
   </div>
 </div>
 
 <div *ngIf="theme" class="overflow-hidden relative max-h-screen">
   <div
-    class="relative flex items-center justify-between px-3 top-0 left-0 right-0 bg-gray-900 py-1 z-50 border-b border-gray-800">
-    <h3 class="font-mono flex justify-start items-center font-bold text-2xl text-white">
-      <a class="px-2" href="https://github.com/kush-team" target="_blank"><img
-          src="assets/GitHub-Mark-Light-32px.png" /></a>
+    class="relative flex items-center justify-between px-3 top-0 left-0 right-0 bg-gray-900 py-1 z-50 border-b border-gray-800"
+  >
+    <h3
+      class="font-mono flex justify-start items-center font-bold text-2xl text-white"
+    >
+      <a class="px-2" href="https://github.com/kush-team" target="_blank"
+        ><img src="assets/GitHub-Mark-Light-32px.png"
+      /></a>
       Kush<span class="opacity-50">Team</span>
       <span class="mx-2 bg-indigo-700 text-sm px-2 py-1 rounded-md">.dev</span>
     </h3>
 
     <app-login *ngIf="!storageService.isAuthenticated()"></app-login>
-    <a class="text-white cursor-pointer hover:opacity-50 font-bold" *ngIf="storageService.isAuthenticated()"
-      (click)="storageService.logout()">Logout </a>
+    <a
+      class="text-white cursor-pointer hover:opacity-50 font-bold"
+      *ngIf="storageService.isAuthenticated()"
+      (click)="storageService.logout()"
+      >Logout
+    </a>
   </div>
   <div class="flex w-full h-screen overflow-hidden relative">
-    <as-split direction="horizontal" (dragEnd) = "splitResize($event)" gutterSize=4>
+    <as-split
+      direction="horizontal"
+      (dragEnd)="splitResize($event)"
+      gutterSize="4"
+    >
       <as-split-area [size]="40">
         <app-playground [theme]="theme" [themes]="themeList"></app-playground>
       </as-split-area>
       <as-split-area [size]="60">
-        <app-landing [query]="theme.landingQuery" [stringTemplate]="theme.landingTemplate"></app-landing>
-        <app-articles [query]="theme.articlesQuery" [stringTemplate]="theme.articlesTemplate"></app-articles>
-        <app-article [query]="theme.articleQuery" [stringTemplate]="theme.articleTemplate"></app-article>
+        <app-landing
+          [query]="theme.landingQuery"
+          [stringTemplate]="theme.landingTemplate"
+        ></app-landing>
+        <app-articles
+          [query]="theme.articlesQuery"
+          [stringTemplate]="theme.articlesTemplate"
+        ></app-articles>
+        <app-article
+          [query]="theme.articleQuery"
+          [stringTemplate]="theme.articleTemplate"
+        ></app-article>
       </as-split-area>
     </as-split>
   </div>

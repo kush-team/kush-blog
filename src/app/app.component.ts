@@ -1,22 +1,21 @@
 import { ThemeService } from './theme.service';
 import { StorageService } from './storage.service';
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import {Apollo, gql} from 'apollo-angular';
+import { Apollo, gql } from 'apollo-angular';
 import { Theme } from './models/theme';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-
 export class AppComponent implements OnInit {
   public title = 'kush-blog';
 
   public loading = true;
   public error: any;
 
-  private gqlTest:string = `
+  private gqlTest: string = `
   {
     GetThemeByName(name: "Original") {
       message
@@ -37,8 +36,8 @@ export class AppComponent implements OnInit {
       }
     }
   }
-`
-  private allThemesQuery:string = `
+`;
+  private allThemesQuery: string = `
     query getAllThemes{
       GetAllThemes {
         dataList {
@@ -58,71 +57,82 @@ export class AppComponent implements OnInit {
         }
     }
 }
-`
-
-
+`;
 
   public theme!: Theme;
 
   public themeList!: Theme[];
 
-  constructor(private apollo: Apollo, public storageService:StorageService, private themeService:ThemeService) {}
+  constructor(
+    private apollo: Apollo,
+    public storageService: StorageService,
+    private themeService: ThemeService
+  ) {}
 
-  public splitResize(event: any) : void {
+  public splitResize(event: any): void {
     window.dispatchEvent(new Event('resize'));
   }
 
   ngOnInit() {
-
-    this.themeService.themeChanged.subscribe(
-      (theme:Theme) => {
-        this.theme = theme;
-      }
-    );
-
-    this.apollo.subscribe({
-            query: gql`
-              subscription themeChanged{
-                themeChanged{
-                    id
-                    name
-                    landingTemplate
-                    landingQuery
-                    articlesQuery
-                    articlesTemplate
-                    articleQuery
-                    articleTemplate
-                }
-            }`
-    }).subscribe((resp:any) => {
-      let themeToUpdate:Theme = this.themeList.filter(t => t.id === resp?.data?.themeChanged?.id)[0];
-
-      if (themeToUpdate) {
-        themeToUpdate.articleQuery = resp?.data?.themeChanged?.articleQuery;
-        themeToUpdate.articleTemplate = resp?.data?.themeChanged?.articleTemplate;
-        themeToUpdate.articlesQuery = resp?.data?.themeChanged?.articlesQuery;
-        themeToUpdate.articlesTemplate = resp?.data?.themeChanged?.articlesTemplate;
-        themeToUpdate.landingQuery = resp?.data?.themeChanged?.landingQuery;
-        themeToUpdate.landingTemplate = resp?.data?.themeChanged?.landingTemplate;
-      }
+    this.themeService.themeChanged.subscribe((theme: Theme) => {
+      this.theme = theme;
     });
 
+    this.apollo
+      .subscribe({
+        query: gql`
+          subscription themeChanged {
+            themeChanged {
+              id
+              name
+              landingTemplate
+              landingQuery
+              articlesQuery
+              articlesTemplate
+              articleQuery
+              articleTemplate
+            }
+          }
+        `,
+      })
+      .subscribe((resp: any) => {
+        let themeToUpdate: Theme = this.themeList.filter(
+          (t) => t.id === resp?.data?.themeChanged?.id
+        )[0];
+
+        if (themeToUpdate) {
+          themeToUpdate.articleQuery = resp?.data?.themeChanged?.articleQuery;
+          themeToUpdate.articleTemplate =
+            resp?.data?.themeChanged?.articleTemplate;
+          themeToUpdate.articlesQuery = resp?.data?.themeChanged?.articlesQuery;
+          themeToUpdate.articlesTemplate =
+            resp?.data?.themeChanged?.articlesTemplate;
+          themeToUpdate.landingQuery = resp?.data?.themeChanged?.landingQuery;
+          themeToUpdate.landingTemplate =
+            resp?.data?.themeChanged?.landingTemplate;
+        }
+      });
 
     this.apollo
       .watchQuery({
         query: gql(this.allThemesQuery),
       })
       .valueChanges.subscribe((result: any) => {
-
-        this.themeList = (result?.data[Object.keys(result?.data)[0]].dataList).map((theme:any) => { return Theme.CopyFrom(theme)}) ;
+        this.themeList = (result?.data[
+          Object.keys(result?.data)[0]
+        ].dataList).map((theme: any) => {
+          return Theme.CopyFrom(theme);
+        });
 
         if (!this.theme) {
-          this.theme = this.themeList[0];
+          let originalFilter: Theme = this.themeList.filter(
+            (t: Theme) => t.name === 'Original'
+          )[0];
+          this.theme = originalFilter;
         }
 
         this.loading = result.loading;
         this.error = result.error;
       });
   }
-
 }

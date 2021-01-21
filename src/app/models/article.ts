@@ -2,8 +2,7 @@ import { Category } from './category';
 import { Author } from './author';
 
 export class Article {
-
-  static CopyFrom(article: any):Article {
+  static CopyFrom(article: any): Article {
     let _article = new Article();
 
     _article.id = article.id;
@@ -22,11 +21,11 @@ export class Article {
     return _article;
   }
 
-  public id!:string;
-  public title!:string;
-  public content!:string;
+  public id!: string;
+  public title!: string;
+  public content!: string;
   public brief!: string;
   public createdAt!: string;
-  public author!:Author;
-  public category!:Category;
+  public author!: Author;
+  public category!: Category;
 }

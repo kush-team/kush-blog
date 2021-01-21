@@ -1,14 +1,25 @@
-import { CommonModule } from "@angular/common";
-import { Compiler, Component, ComponentRef, CUSTOM_ELEMENTS_SCHEMA, Directive, Input, ModuleWithComponentFactories, NgModule, OnChanges, Type, ViewContainerRef } from "@angular/core";
-import { ArticlesService } from "./articles.service";
-import { PlaygroundService } from "./playground.service";
+import { CommonModule } from '@angular/common';
+import {
+  Compiler,
+  Component,
+  ComponentRef,
+  CUSTOM_ELEMENTS_SCHEMA,
+  Directive,
+  Input,
+  ModuleWithComponentFactories,
+  NgModule,
+  OnChanges,
+  Type,
+  ViewContainerRef,
+} from '@angular/core';
+import { ArticlesService } from './articles.service';
+import { PlaygroundService } from './playground.service';
 
 @Directive({
-  selector: '[compile]'
+  selector: '[compile]',
 })
-
 export class CompileDirective implements OnChanges {
-  @Input() compile: string = "";
+  @Input() compile: string = '';
   @Input() compileContext: any;
 
   public compRef!: ComponentRef<any>;
@@ -16,8 +27,8 @@ export class CompileDirective implements OnChanges {
   constructor(private vcRef: ViewContainerRef, private compiler: Compiler) {}
 
   ngOnChanges() {
-    if(!this.compile) {
-      if(this.compRef) {
+    if (!this.compile) {
+      if (this.compRef) {
         this.updateProperties();
         return;
       }
@@ -30,43 +41,48 @@ export class CompileDirective implements OnChanges {
     const component = this.createDynamicComponent(this.compile);
     const module = this.createDynamicModule(component);
 
-    this.compiler.compileModuleAndAllComponentsAsync(module)
+    this.compiler
+      .compileModuleAndAllComponentsAsync(module)
       .then((moduleWithFactories: ModuleWithComponentFactories<any>) => {
-        let compFactory = moduleWithFactories.componentFactories.find(x => x.componentType === component);
+        let compFactory = moduleWithFactories.componentFactories.find(
+          (x) => x.componentType === component
+        );
         if (compFactory) {
           this.compRef = this.vcRef.createComponent(compFactory);
         }
         this.updateProperties();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
 
   updateProperties() {
-    for(var prop in this.compileContext) {
+    for (var prop in this.compileContext) {
       this.compRef.instance[prop] = this.compileContext[prop];
     }
   }
 
-  private createDynamicComponent (template:string) {
+  private createDynamicComponent(template: string) {
     @Component({
       selector: 'custom-dynamic-component',
       template: template,
     })
     class CustomDynamicComponent {
-      constructor(private playgroundService: PlaygroundService, private articleService: ArticlesService) {}
+      constructor(
+        private playgroundService: PlaygroundService,
+        private articleService: ArticlesService
+      ) {}
     }
     return CustomDynamicComponent;
   }
 
-
-  private createDynamicModule (component: Type<any>) {
+  private createDynamicModule(component: Type<any>) {
     @NgModule({
       imports: [CommonModule],
       declarations: [component],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-      providers: [PlaygroundService, ArticlesService]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [PlaygroundService, ArticlesService],
     })
     class DynamicModule {}
     return DynamicModule;

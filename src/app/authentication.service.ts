@@ -8,14 +8,12 @@ import { map, catchError } from 'rxjs/operators';
 import { DocumentNode } from 'graphql';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class AuthenticationService {
+  constructor(private apollo: Apollo) {}
 
-  constructor(private apollo: Apollo) { }
-
-  private LOGIN_MUTATION:DocumentNode = gql`
+  private LOGIN_MUTATION: DocumentNode = gql`
     mutation Login($emailAddress: String!, $password: String!) {
       Login(emailAddress: $emailAddress, password: $password) {
         message
@@ -36,9 +34,8 @@ export class AuthenticationService {
       mutation: this.LOGIN_MUTATION,
       variables: {
         emailAddress: emailAddress,
-        password: password
-      }
-    })
+        password: password,
+      },
+    });
   }
-
 }

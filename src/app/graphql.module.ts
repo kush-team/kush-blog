@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLink} from 'apollo-angular/http';
+import { NgModule } from '@angular/core';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { split, ApolloClientOptions, InMemoryCache } from '@apollo/client/core';
-import {WebSocketLink} from '@apollo/client/link/ws';
-import {getMainDefinition} from '@apollo/client/utilities';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 
 @NgModule({
   providers: [
@@ -29,10 +29,13 @@ import {getMainDefinition} from '@apollo/client/utilities';
           // split based on operation type
           ({ query }) => {
             let definition = getMainDefinition(query);
-            return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+            return (
+              definition.kind === 'OperationDefinition' &&
+              definition.operation === 'subscription'
+            );
           },
           ws,
-          http,
+          http
         );
 
         return {

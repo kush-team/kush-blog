@@ -1,8 +1,6 @@
 import { Author } from './author';
 
 export class Theme {
-
-
   static CopyFrom(data: any): Theme {
     let _theme = new Theme();
     _theme.name = data.name;
@@ -21,7 +19,7 @@ export class Theme {
     return _theme;
   }
 
-  public id!:string;
+  public id!: string;
   public name!: string;
   public author!: Author;
 
@@ -33,9 +31,8 @@ export class Theme {
   public articlesQuery!: string;
   public articleQuery!: string;
 
-
   public getPropertyByName(key: string): string {
-    switch(key) {
+    switch (key) {
       case 'landingTemplate': {
         return this.landingTemplate;
       }
@@ -55,33 +52,33 @@ export class Theme {
         return this.landingQuery;
       }
     }
-    return "";
+    return '';
   }
 
   public setPropertyByName(key: string, value: string): void {
-    switch(key) {
+    switch (key) {
       case 'landingTemplate': {
-         this.landingTemplate = value;
+        this.landingTemplate = value;
         break;
       }
       case 'articlesTemplate': {
-         this.articlesTemplate = value;
+        this.articlesTemplate = value;
         break;
       }
       case 'articleTemplate': {
-         this.articleTemplate = value;
+        this.articleTemplate = value;
         break;
       }
       case 'articlesQuery': {
-         this.articlesQuery = value;
+        this.articlesQuery = value;
         break;
       }
       case 'articleQuery': {
-         this.articleQuery = value;
+        this.articleQuery = value;
         break;
       }
       case 'landingQuery': {
-         this.landingQuery = value;
+        this.landingQuery = value;
       }
     }
   }

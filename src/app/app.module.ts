@@ -24,7 +24,7 @@ import { AngularSplitModule } from 'angular-split';
     LandingComponent,
     ArticleComponent,
     CompileDirective,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,17 +35,15 @@ import { AngularSplitModule } from 'angular-split';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularSplitModule
+    AngularSplitModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-
-export class AppModule { }
+export class AppModule {}

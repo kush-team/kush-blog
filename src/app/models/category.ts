@@ -1,5 +1,4 @@
 export class Category {
-
   static CopyFrom(category: any): Category {
     let _category = new Category();
     _category.id = category.id;

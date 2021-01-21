@@ -1,1 +1,11 @@
-<ng-container *compile="stringTemplate; context: { setFile: this.setFile }"></ng-container>
+<ng-container
+  *compile="
+    stringTemplate;
+    context: {
+      setFile: this.setFile,
+      categories: this.categories,
+      setCategoryID: this.setCategoryID,
+      categoryID: this.categoryID
+    }
+  "
+></ng-container>

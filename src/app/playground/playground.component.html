@@ -1,42 +1,69 @@
 <div class="flex flex-col font-mono relative">
-  <button *ngIf="storageService.isAuthenticated() && storageService.getCurrentUser().id == theme.author.id"
+  <button
+    *ngIf="
+      storageService.isAuthenticated() &&
+      storageService.getCurrentUser().id == theme.author.id
+    "
     class="z-50 bg-green-500 absolute hover:bg-green-600 -translate-x-20 transition-all duration-500 right-0 top-0 transform rounded-none px-4 py-1 font-bold text-white"
-    (click)="saveTheme()">Save
+    (click)="saveTheme()"
+  >
+    Save
   </button>
 
-  <button *ngIf="storageService.isAuthenticated()"
+  <button
+    *ngIf="storageService.isAuthenticated()"
     class="z-50 bg-indigo-500 absolute hover:bg-indigo-600 transition-all duration-500 right-0 top-0 transform rounded-none px-4 py-1 font-bold text-white"
-    (click)="cloneTheme()">Clone
+    (click)="cloneTheme()"
+  >
+    Clone
   </button>
 
-  <div class="shadow-lg  delay-150 border-r-2 border-orange-500 left-0 pt-2 top-0 bottom-0 absolute w-64  bg-gray-900 text-white font-mono z-40 transform duration-1000 transition-all -translate-x-56 hover:translate-x-0">
-    <div class="absolute right-0 top-0 transform translate-x-16 bg-orange-500 px-6 py-1 font-bold flex">
-      <span class="transform transition-all inline-block rotate-90 font-sans mr-2">
+  <div
+    class="shadow-lg delay-150 border-r-2 border-orange-500 left-0 pt-2 top-0 bottom-0 absolute w-64 bg-gray-900 text-white font-mono z-40 transform duration-1000 transition-all -translate-x-56 hover:translate-x-0"
+  >
+    <div
+      class="absolute right-0 top-0 transform translate-x-16 bg-orange-500 px-6 py-1 font-bold flex"
+    >
+      <span
+        class="transform transition-all inline-block rotate-90 font-sans mr-2"
+      >
         III
       </span>
       Data
     </div>
     <h1>
       <label class="block mt-12 px-4">
-        <select class="form-select mt-1 block w-full bg-gray-900" [(ngModel)]="themeID" (change)="themeSelected()">
-          <option *ngFor="let t of themes" [value]="t.id">{{t.name}} by <small>{{t.author.username}}</small></option>
+        <select
+          class="form-select mt-1 block w-full bg-gray-900"
+          [(ngModel)]="themeID"
+          (change)="themeSelected()"
+        >
+          <option *ngFor="let t of themes" [value]="t.id">
+            {{ t.name }} by <small>{{ t.author.username }}</small>
+          </option>
         </select>
       </label>
     </h1>
     <div class="space-y-3 text-sm">
       <div>
         <h4 class="my-6 font-bold pl-4">Querys</h4>
-        <div class=" space-y-3">
-          <div class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('landingQuery', 'graphql')">
+        <div class="space-y-3">
+          <div
+            class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
+            (click)="setFile('landingQuery', 'graphql')"
+          >
             landing<span class="text-orange-500">.graphql</span>
           </div>
-          <div class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('articlesQuery', 'graphql')">
+          <div
+            class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
+            (click)="setFile('articlesQuery', 'graphql')"
+          >
             articles<span class="text-orange-500">.graphql</span>
           </div>
-          <div class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('articleQuery', 'graphql')">
+          <div
+            class="pl-4 border-b border-orange-500 hover:text-orange-300 font-bold cursor-pointer"
+            (click)="setFile('articleQuery', 'graphql')"
+          >
             article<span class="text-orange-500">.graphql</span>
           </div>
         </div>
@@ -44,26 +71,45 @@
       <div class="mt-3 mb-3">
         <h4 class="my-12 mb-3 pl-4 font-bold">Templates</h4>
         <div class="space-y-3">
-          <div class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
-            (click)="setFile('landingTemplate', 'html')">
+          <div
+            class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
+            (click)="setFile('landingTemplate', 'html')"
+          >
             landing<span class="text-blue-500">.html</span>
           </div>
-          <div class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
-            (click)="setFile('articlesTemplate', 'html')">
+          <div
+            class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
+            (click)="setFile('articlesTemplate', 'html')"
+          >
             articles<span class="text-blue-500">.html</span>
           </div>
-          <div class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
-            (click)="setFile('articleTemplate', 'html')">
+          <div
+            class="pl-4 border-b border-blue-500 hover:text-blue-300 font-bold cursor-pointer"
+            (click)="setFile('articleTemplate', 'html')"
+          >
             article<span class="text-blue-500">.html</span>
           </div>
         </div>
       </div>
-      <a class="relative block ml-2 pt-6" target="_blank" rel="noopener noreferrer"
-      href="https://www.buymeacoffee.com/kushteam"><img
-        src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kushteam&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"></a>
+      <a
+        class="relative block ml-2 pt-6"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.buymeacoffee.com/kushteam"
+        ><img
+          src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=kushteam&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff"
+      /></a>
     </div>
   </div>
-  <div class="w-full pt-8 bg-gray-900 pl-6 h-screen" style="padding-top: 2.2rem; background: #1e1e1e;">
-    <ngx-monaco-editor style="height:90%; width: 100%;" [options]="editorOptions" [(ngModel)]="code"  automaticLayout=true></ngx-monaco-editor>
+  <div
+    class="w-full pt-8 bg-gray-900 pl-6 h-screen"
+    style="padding-top: 2.2rem; background: #1e1e1e"
+  >
+    <ngx-monaco-editor
+      style="height: 90%; width: 100%"
+      [options]="editorOptions"
+      [(ngModel)]="code"
+      automaticLayout="true"
+    ></ngx-monaco-editor>
   </div>
 </div>

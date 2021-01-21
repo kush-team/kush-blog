@@ -2,15 +2,14 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Theme } from './models/theme';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeService {
+  public themeChanged: EventEmitter<Theme> = new EventEmitter();
 
-  public themeChanged:EventEmitter<Theme> = new EventEmitter();
+  constructor() {}
 
-  constructor() { }
-
-  public setTheme(theme:Theme): void {
+  public setTheme(theme: Theme): void {
     this.themeChanged.emit(theme);
   }
 }
