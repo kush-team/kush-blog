@@ -99,7 +99,6 @@ export class AppComponent implements OnInit {
         let themeToUpdate: Theme = this.themeList.filter(
           (t) => t.id === resp?.data?.themeChanged?.id
         )[0];
-
         if (themeToUpdate) {
           themeToUpdate.articleQuery = resp?.data?.themeChanged?.articleQuery;
           themeToUpdate.articleTemplate =
@@ -118,21 +117,25 @@ export class AppComponent implements OnInit {
         query: gql(this.allThemesQuery),
       })
       .valueChanges.subscribe((result: any) => {
-        this.themeList = (result?.data[
-          Object.keys(result?.data)[0]
-        ].dataList).map((theme: any) => {
-          return Theme.CopyFrom(theme);
-        });
+        if (!this.themeList) {
+          this.themeList = (result?.data[
+            Object.keys(result?.data)[0]
+          ].dataList).map((theme: any) => {
+            return Theme.CopyFrom(theme);
+          });
 
-        if (!this.theme) {
-          let originalFilter: Theme = this.themeList.filter(
-            (t: Theme) => t.name === 'Original'
-          )[0];
-          this.theme = originalFilter;
+          if (!this.theme) {
+            let originalFilter: Theme = this.themeList.filter(
+              (t: Theme) => t.name === 'Original'
+            )[0];
+            this.themeService.setTheme(originalFilter);
+          } else {
+            this.themeService.setTheme(this.theme);
+          }
+
+          this.loading = result.loading;
+          this.error = result.error;
         }
-
-        this.loading = result.loading;
-        this.error = result.error;
       });
   }
 }
