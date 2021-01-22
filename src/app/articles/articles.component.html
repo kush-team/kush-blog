@@ -1,10 +1,8 @@
-<ng-container
-  *compile="
-    stringTemplate;
-    context: {
-      setFile: this.setFile,
-      setArticle: this.setArticle,
-      articles: articles
-    }
-  "
-></ng-container>
+<app-dynamic
+  [compile]="stringTemplate"
+  [compileContext]="{
+    setFile: this.setFile,
+    setArticle: this.setArticle,
+    articles: articles
+  }"
+></app-dynamic>

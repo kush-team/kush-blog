@@ -1,11 +1,9 @@
-<ng-container
-  *compile="
-    stringTemplate;
-    context: {
-      setFile: this.setFile,
-      categories: this.categories,
-      setCategoryID: this.setCategoryID,
-      categoryID: this.categoryID
-    }
-  "
-></ng-container>
+<app-dynamic
+  [compile]="stringTemplate"
+  [compileContext]="{
+    setFile: this.setFile,
+    categories: this.categories,
+    categoryID: this.categoryID,
+    setCategoryID: this.setCategoryID
+  }"
+></app-dynamic>

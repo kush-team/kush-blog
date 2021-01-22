@@ -116,8 +116,8 @@
     <as-split
       direction="horizontal"
       (dragEnd)="splitResize($event)"
-      gutterSize="4"
-      useTransition="true"
+      [gutterSize]=4
+      [useTransition]=true
     >
       <as-split-area [size]="codeSize">
         <app-playground [theme]="theme" [themes]="themeList"></app-playground>

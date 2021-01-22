@@ -34,7 +34,7 @@
               },
               "src/favicon.ico",
               "src/assets",
-              "src/site.webmanifest.json",
+              "src/site.webmanifest",
               "src/android-chrome-192x192.png",
               "src/android-chrome-384x384.png",
               "src/apple-touch-icon.png",
