@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   public loading = true;
   public error: any;
 
+  public codeSize: number = 40;
+  public siteSize: number = 60;
+  public isOpen: boolean = true;
+
   private gqlTest: string = `
   {
     GetThemeByName(name: "Original") {
@@ -70,7 +74,26 @@ export class AppComponent implements OnInit {
   ) {}
 
   public splitResize(event: any): void {
+    this.codeSize = event.sizes[0];
+    this.siteSize = event.sizes[1];
+    this.isOpen = this.codeSize > 5;
+
     window.dispatchEvent(new Event('resize'));
+  }
+
+  public closeCodeEditor(): void {
+    this.codeSize = 0;
+    this.siteSize = 100;
+    this.isOpen = false;
+  }
+
+  public openCodeEditor(): void {
+    this.codeSize = 40;
+    this.siteSize = 60;
+    this.isOpen = true;
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 500);
   }
 
   ngOnInit() {
