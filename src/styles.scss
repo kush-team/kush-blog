@@ -1,1 +1,10 @@
 /* Works on Chrome, Edge, and Safari */
+
+.as-split-gutter {
+  transition: all .3s !important;
+  background-color: #333 !important;
+}
+
+.as-split-gutter:hover {
+  background-color: #ddd !important;
+}

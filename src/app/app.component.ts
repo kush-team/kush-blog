@@ -88,8 +88,8 @@ export class AppComponent implements OnInit {
   }
 
   public openCodeEditor(): void {
-    this.codeSize = 40;
-    this.siteSize = 60;
+    this.codeSize = 65;
+    this.siteSize = 35;
     this.isOpen = true;
     setTimeout(() => {
       window.dispatchEvent(new Event('resize'));

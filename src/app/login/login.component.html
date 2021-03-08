@@ -6,13 +6,13 @@
   novalidate
   class="w-full text-white"
 >
-  <div class="flex items-center py-2">
+  <div class="flex flex-col items-center mr-2 pt-2 w-full bg-gray-800">
     <input
       matInput
       type="text"
       formControlName="emailAddress"
       placeholder="Email"
-      class="appearance-none placeholder-opacity-50 border-b-2 border-green-500 text-white bg-transparent w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
+      class="appearance-none placeholder-opacity-50 border-green-500 text-white text-sm bg-transparent w-full py-1 px-2 leading-tight  border-b focus:outline-none"
     />
     <input
       matInput
@@ -20,7 +20,7 @@
       formControlName="password"
       autocomplete="current-password"
       required
-      class="appearance-none placeholder-opacity-50 border-b-2 border-green-500 text-white bg-transparent w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
+      class="appearance-none placeholder-opacity-50 border-green-500 text-white text-sm bg-transparent w-full py-1 px-2 leading-tight focus:outline-none"
       placeholder="Password"
     />
 
@@ -29,7 +29,7 @@
       type="submit"
       form="login-form"
       [disabled]="!loginForm.valid"
-      class="flex-shrink-0 bg-green-500 hover:bg-green-700 text-sm text-white py-1 px-2 rounded"
+      class="py-1  mt-2 w-full bg-green-500 hover:bg-green-700 text-xs text-white "
     >
       Sign In
     </button>
