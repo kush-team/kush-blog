@@ -27,7 +27,7 @@ export class PlaygroundComponent implements OnInit {
     "import { Component, OnInit } from '@angular/core';\n\n@Component({\n\tselector: 'app-article',\n\ttemplateUrl: './hellowornd.component.html',\n\tstyleUrls: ['./hellowornd.component.scss']\n})\n\nexport class HelloWordComponent implements OnInit {\n\t\n\tconstructor() { }\n\n\tngOnInit() {\n\t\tconsole.log('Hello Word!')\n\t}\n}\n";
   private differ: KeyValueDiffer<string, any>;
 
-  public editorOptions = { theme: 'vs-dark', language: 'typescript' };
+  public editorOptions = { theme: 'vs-dark', language: 'typescript', tabSize: "2" };
   private key: string = '';
   public themeID: string;
 
@@ -83,7 +83,7 @@ export class PlaygroundComponent implements OnInit {
     this.playgroundService.fileChanged.subscribe((data: any) => {
       this.key = data.key;
       this.code = this.theme.getPropertyByName(this.key);
-      this.editorOptions = { theme: 'vs-dark', language: data.language };
+      this.editorOptions = { theme: 'vs-dark', language: data.language, tabSize: "2" };
     });
   }
 

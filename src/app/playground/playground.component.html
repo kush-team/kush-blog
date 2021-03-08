@@ -1,37 +1,15 @@
 <div class="flex font-mono relative">
-  <div class="absolute right-0 bottom-0 flex justify-end pb-2 items-center z-50 w-full left-0">
-    <button *ngIf="storageService.isAuthenticated()"
-      class="bg-indigo-700 hover:bg-indigo-600 items-center transition-all duration-500 right-0 top-0 transform rounded-sm text-xs flex mr-3 px-4 pr-2 py-1 font-bold text-white"
-      (click)="cloneTheme()">
-      Clone
-      <svg class="w-5 ml-1 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-      </svg>
-    </button>
-    <button *ngIf="
-      storageService.isAuthenticated() &&
-      storageService.getCurrentUser().id == theme.author.id
-    " class="bg-green-700 hover:bg-green-600 items-center transition-all duration-500 right-0 top-0 transform rounded-sm text-xs flex mr-3 px-4 pr-2 py-1 font-bold text-white"
-      (click)="saveTheme()">
-      Save
-      <svg class="w-5 ml-1 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-      </svg>
-    </button>
-  </div>
+
   <div
-    class="shadow-lg delay-100 border-r-2 border-gray-800 left-0 w-64 transform bg-gray-900 text-white font-mono z-40 h-screen relative duration-200 transition-all overflow-y-auto overflow-x-hidden">
-    <div class="w-full flex left-0">
-      <a class="text-gray-500 cursor-pointer w-full bg-gray-700 text-center hover:bg-gray-900 text-xs py-1 font-bold"
+    class="shadow-lg delay-100 border-r-2 border-gray-800 left-0 w-64 transform bg-gray-900 text-white font-mono z-40 min-h-screen relative duration-200 transition-all overflow-y-auto overflow-x-hidden">
+    <div class="w-full">
+      <a class="text-gray-500 w-full block cursor-pointer w-full bg-gray-700 text-center hover:bg-gray-900 text-xs py-1 font-bold"
         *ngIf="storageService.isAuthenticated()" (click)="storageService.logout()">Logout
       </a>
       <app-login *ngIf="!storageService.isAuthenticated()"></app-login>
     </div>
     <div class="border-b bg-gray-800 border-gray-800">
-      <label class="block pt-3 pb-4 px-1">
+      <label class="block py-3 px-1">
         <small class="text-xs opacity-50 px-1">Select template</small>
         <select class="form-select px-1 mt-1 text-sm py-1 block w-full bg-gray-700" [(ngModel)]="themeID"
           (change)="themeSelected()">
@@ -40,6 +18,31 @@
           </option>
         </select>
       </label>
+      <div class="grid grid-cols-1 gap-2 w-full px-1 pb-2">
+        <button *ngIf="
+          storageService.isAuthenticated() &&
+          storageService.getCurrentUser().id == theme.author.id
+        " class="bg-green-700 hover:bg-green-600  transition-all duration-500 transform rounded-sm text-center flex text-sm items-center justify-center px-1 py-1 font-bold text-white" (click)="saveTheme()">
+          
+          <span class="">Save</span>
+          <svg class="w-5 h-5 pl-1 flex justify-center items-center" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </button>
+        <button *ngIf="storageService.isAuthenticated()"
+          class="bg-blue-700 hover:bg-blue-600 transition-all duration-500 transform rounded-sm text-center flex text-sm items-center justify-center px-1 py-1 font-bold text-white"
+          (click)="cloneTheme()">
+          <span class="">Clone</span>
+          <div class="w-5 h-5 pl-1 flex justify-center items-center">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </div>
+        </button>
+        
+      </div>
     </div>
     <div class="space-y-1 text-xs mt-4">
       <div>
@@ -75,23 +78,23 @@
         </div>
       </div>
 
-      <div class="border-t border-gray-800 border-b bottom-0 grid grid-cols-1  w-full  mb-1">
+      <div class="border-t pt-12 bg-gray-800 border-gray-800 border-b  grid grid-cols-1  w-full  mb-1">
         <a href="https://github.com/kush-team" target="_blank"
-          class="font-mono flex-col  flex justify-center text-center p-3 items-center font-bold  hover:bg-gray-800 text-white">
-          <div class="px-2" href="https://github.com/kush-team" target="_blank">
-            <img class="w-6 h-6" src="assets/GitHub-Mark-Light-32px.png" />
+          class="font-mono  flex justify-start text-center p-3 items-center text-left font-bold  hover:bg-gray-800 text-white">
+          <div class="pr-2 flex justify-center items-center" href="https://github.com/kush-team" target="_blank">
+            <img class="w-4 h-4" src="assets/GitHub-Mark-Light-32px.png" />
           </div>
           <span class="text-gray-100 leading-tight">Kush Team</span>
         </a>
         <a href="https://www.buymeacoffee.com/kushteam" target="_blank"
-          class="font-mono bg-orange-500 hover:bg-orange-600 flex-col flex justify-center text-center p-2 items-center font-bold  text-white">
-          <div class="px-2" href="https://www.buymeacoffee.com/kushteam" target="_blank">
-            <img class="w-6 h-6" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" />
+          class="font-mono bg-orange-500 hover:bg-orange-600 flex justify-start text-center p-2 items-center text-left font-bold  text-white">
+          <div class="pr-2 flex justify-center items-center" href="https://www.buymeacoffee.com/kushteam" target="_blank">
+            <img class="w-4 h-4" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" />
           </div>
           <span class="text-gray-900 leading-tight">Buy us a coffee</span>
         </a>
       </div>
-      
+
     </div>
   </div>
   <div class="w-full bg-gray-900 min-h-screen pt-12 overflow-hidden" style="background: #1e1e1e">
