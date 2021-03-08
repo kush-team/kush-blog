@@ -22,7 +22,14 @@
 <div *ngIf="theme" class="overflow-hidden relative max-h-screen">
   <div class="absolute flex items-center justify-center w-full px-4 bottom-0 right-0 py-1 z-50 border-b border-gray-800"
     style="background: rgba(0, 0, 0, .5)">
-    <span class="font-mono text-white mr-4">KushTeam.dev</span>
+    <div class="flex items-center">
+      <span class="font-mono text-white mr-4">KushTeam.dev</span>
+      <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M7.3 14.7a1 1 0 010-1.4l3.3-3.3-3.3-3.3a1 1 0 011.4-1.4l4 4a1 1 0 010 1.4l-4 4a1 1 0 01-1.4 0z" clip-rule="evenodd"/>
+      </svg>
+      <span class="font-mono text-white ml-4">Original</span>
+      <span class="font-mono text-white ml-2 opacity-50">by Santuan</span>
+    </div>
     <div class="flex-1 flex items-center justify-end py-2 ">
       <button (click)="openCodeEditor()"
         class="opacity-75 w-5 h-5 mr-5 hover:opacity-100 transition-all duration-500 transform outline-none" [ngClass]="{
