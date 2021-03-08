@@ -1,7 +1,6 @@
 <div class="flex font-mono relative">
-
   <div
-    class="shadow-lg delay-100 border-r-2 border-gray-800 left-0 w-64 transform bg-gray-900 text-white font-mono z-40 min-h-screen relative duration-200 transition-all overflow-y-auto overflow-x-hidden">
+    class="shadow-lg delay-100 m-0 border-r-2 border-gray-800 left-0 w-64 transform bg-gray-900 text-white font-mono z-40 min-h-screen  duration-200 transition-all overflow-y-auto overflow-x-hidden">
     <div class="w-full">
       <a class="text-gray-500 w-full block cursor-pointer w-full bg-gray-700 text-center hover:bg-gray-900 text-xs py-1 font-bold"
         *ngIf="storageService.isAuthenticated()" (click)="storageService.logout()">Logout
@@ -22,10 +21,12 @@
         <button *ngIf="
           storageService.isAuthenticated() &&
           storageService.getCurrentUser().id == theme.author.id
-        " class="bg-green-700 hover:bg-green-600  transition-all duration-500 transform rounded-sm text-center flex text-sm items-center justify-center px-1 py-1 font-bold text-white" (click)="saveTheme()">
-          
+        " class="bg-green-700 hover:bg-green-600  transition-all duration-500 transform rounded-sm text-center flex text-sm items-center justify-center px-1 py-1 font-bold text-white"
+          (click)="saveTheme()">
+
           <span class="">Save</span>
-          <svg class="w-5 h-5 pl-1 flex justify-center items-center" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg class="w-5 h-5 pl-1 flex justify-center items-center" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </button>
@@ -41,7 +42,7 @@
             </svg>
           </div>
         </button>
-        
+
       </div>
     </div>
     <div class="space-y-1 text-xs mt-4">
@@ -78,7 +79,7 @@
         </div>
       </div>
 
-      <div class="border-t pt-12 bg-gray-800 border-gray-800 border-b  grid grid-cols-1  w-full  mb-1">
+      <div class=" px-1 py-12  grid grid-cols-1  w-full  mb-1">
         <a href="https://github.com/kush-team" target="_blank"
           class="font-mono  flex justify-start text-center p-3 items-center text-left font-bold  hover:bg-gray-800 text-white">
           <div class="pr-2 flex justify-center items-center" href="https://github.com/kush-team" target="_blank">
@@ -88,7 +89,8 @@
         </a>
         <a href="https://www.buymeacoffee.com/kushteam" target="_blank"
           class="font-mono bg-orange-500 hover:bg-orange-600 flex justify-start text-center p-2 items-center text-left font-bold  text-white">
-          <div class="pr-2 flex justify-center items-center" href="https://www.buymeacoffee.com/kushteam" target="_blank">
+          <div class="pr-2 flex justify-center items-center" href="https://www.buymeacoffee.com/kushteam"
+            target="_blank">
             <img class="w-4 h-4" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" />
           </div>
           <span class="text-gray-900 leading-tight">Buy us a coffee</span>
@@ -97,8 +99,8 @@
 
     </div>
   </div>
-  <div class="w-full bg-gray-900 min-h-screen pt-12 overflow-hidden" style="background: #1e1e1e">
-    <ngx-monaco-editor style="height: 100%; width: 100%" [options]="editorOptions" [(ngModel)]="code"
+  <div class="w-full bg-gray-900  pt-5 overflow-hidden">
+    <ngx-monaco-editor style="height: 95vh; width: 100%" [options]="editorOptions" [(ngModel)]="code"
       automaticLayout="true"></ngx-monaco-editor>
   </div>
 </div>
