@@ -1,30 +1,32 @@
-<div class="flex font-mono relative">
+<div class="relative flex font-mono">
   <div
-    class="shadow-lg delay-100 m-0 border-r-2 border-gray-800 left-0 w-64 transform bg-gray-900 text-white font-mono z-40 min-h-screen  duration-200 transition-all overflow-y-auto overflow-x-hidden">
+    class="left-0 z-40 w-64 min-h-screen m-0 overflow-x-hidden overflow-y-auto font-mono text-white transition-all duration-200 delay-100 transform bg-gray-900 border-r-2 border-gray-800 shadow-lg"
+    style="z-index: 999;">
     <div class="w-full">
-      <a class="text-gray-500 w-full block cursor-pointer w-full bg-gray-700 text-center hover:bg-gray-900 text-xs py-1 font-bold"
-        *ngIf="storageService.isAuthenticated()" (click)="storageService.logout()">Logout
+      <a class="block w-full py-1 text-sm font-bold text-center text-gray-400 bg-gray-700 cursor-pointer hover:bg-red-500 hover:text-white"
+        *ngIf="storageService.isAuthenticated()" (click)="storageService.logout()">
+        Logout
       </a>
       <app-login *ngIf="!storageService.isAuthenticated()"></app-login>
     </div>
-    <div class="border-b bg-gray-800 border-gray-800">
-      <label class="block py-3 pb-0 px-0 relative">
-        <div class="flex justify-between">
-          <small class="text-xs opacity-50 px-1">Theme</small>
-          <button *ngIf="storageService.isAuthenticated()"
-            class=" transition-all duration-500 text-center flex text-xs items-center justify-center px-1 font-bold text-white "
-            (click)="cloneTheme()">
-            <span class="hover:text-gray-400">Clone</span>
-            <div class="w-5 h-5 pl-1 flex justify-center items-center">
-              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </div>
-          </button>
-        </div>
-        <select class="form-select px-1 mt-1 text-sm py-1 block w-full bg-gray-700" [(ngModel)]="themeID"
+    <div class="px-2 pt-6 pb-3 bg-gray-800 border-b border-gray-800">
+      <div class="flex justify-between pb-1">
+        <small class="px-1 text-xs opacity-50">Theme</small>
+        <button *ngIf="storageService.isAuthenticated()"
+          class="flex items-center justify-center px-1 text-xs font-bold text-center text-white transition-all duration-500 "
+          (click)="cloneTheme()">
+          <span class="hover:text-gray-400">Clone</span>
+          <div class="flex items-center justify-center w-5 h-5 pl-1">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <label class="relative block">
+        <select class="block w-full p-1 text-sm bg-gray-700 form-select" [(ngModel)]="themeID"
           (change)="themeSelected()">
           <option *ngFor="let t of themes" [value]="t.id">
             {{ t.name }}
@@ -32,77 +34,73 @@
         </select>
       </label>
     </div>
-    <div class="space-y-1 text-xs mt-4">
-      <div>
-        <div class="space-y-1">
-          <div class="py-1 pb-2 pl-2 border-b border-gray-700 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('landingQuery', 'graphql')">
-            landing<span class="text-orange-500">.graphql</span>
-          </div>
-          <div class="py-1 pb-2 pl-2 border-b border-gray-700 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('articlesQuery', 'graphql')">
-            articles<span class="text-orange-500">.graphql</span>
-          </div>
-          <div class="py-1 pb-2 pl-2 border-b border-gray-600 hover:text-orange-300 font-bold cursor-pointer"
-            (click)="setFile('articleQuery', 'graphql')">
-            article<span class="text-orange-500">.graphql</span>
-          </div>
-        </div>
-      </div>
+    <div class="mt-4 space-y-1 text-sm">
       <div class="">
         <div class="space-y-1">
-          <div class="py-1 pb-2 pl-2 border-b border-gray-700 hover:text-blue-300 font-bold cursor-pointer"
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-700 cursor-pointer hover:text-blue-300"
             (click)="setFile('landingTemplate', 'html')">
-            landing<span class="text-blue-500">.html</span>
+            <span class="text-blue-400">html.</span>landing
           </div>
-          <div class="py-1 pb-2 pl-2 border-b border-gray-700 hover:text-blue-300 font-bold cursor-pointer"
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-700 cursor-pointer hover:text-blue-300"
             (click)="setFile('articlesTemplate', 'html')">
-            articles<span class="text-blue-500">.html</span>
+            <span class="text-blue-400">html.</span>articles
           </div>
-          <div class="py-1 pb-2 pl-2 border-b border-gray-700 hover:text-blue-300 font-bold cursor-pointer"
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-700 cursor-pointer hover:text-blue-300"
             (click)="setFile('articleTemplate', 'html')">
-            article<span class="text-blue-500">.html</span>
+            <span class="text-blue-400">html.</span>article
           </div>
         </div>
       </div>
-
-      <div class="grid grid-cols-1 gap-2 w-full px-1 pt-3 pb-2">
-        <button *ngIf="
-          storageService.isAuthenticated() &&
-          storageService.getCurrentUser().id == theme.author.id
-        " class="bg-green-700 hover:bg-green-600  transition-all duration-500 transform rounded-sm text-center flex text-sm items-center justify-center px-1 py-1 font-bold text-white"
+      <div>
+        <div class="space-y-1">
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-700 cursor-pointer hover:text-yellow-300"
+            (click)="setFile('landingQuery', 'graphql')">
+            <span class="text-yellow-500">graphql.</span>landing
+          </div>
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-700 cursor-pointer hover:text-yellow-300"
+            (click)="setFile('articlesQuery', 'graphql')">
+            <span class="text-yellow-500">graphql.</span>articles
+          </div>
+          <div class="py-1 pb-2 pl-2 font-bold border-b border-gray-600 cursor-pointer hover:text-yellow-300"
+            (click)="setFile('articleQuery', 'graphql')">
+            <span class="text-yellow-500">graphql.</span>article
+          </div>
+        </div>
+      </div>
+      <div class="grid w-full grid-cols-1 gap-2 px-1 pt-3 pb-2">
+        <button *ngIf="storageService.isAuthenticated() && storageService.getCurrentUser().id == theme.author.id"
+          class="flex items-center justify-center px-1 py-1 text-sm font-bold text-center text-white transition-all duration-500 transform bg-green-700 rounded-sm hover:bg-green-600"
           (click)="saveTheme()">
-
-          <span class="">Save file</span>
-          <svg class="w-5 h-5 pl-1 flex justify-center items-center" xmlns="http://www.w3.org/2000/svg" fill="none"
+          <span>Save file</span>
+          <svg class="flex items-center justify-center w-5 h-5 pl-1" xmlns="http://www.w3.org/2000/svg" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
         </button>
       </div>
+    </div>
+    <div class="absolute bottom-0 grid w-full grid-cols-1 bg-gray-700">
+      <a href="https://github.com/kush-team" target="_blank"
+        class="flex items-center justify-between p-2 py-3 font-mono font-bold text-left text-center text-white hover:bg-gray-800">
+        <span class="text-sm leading-tight text-gray-100">Kush Team</span>
 
-      <div class=" px-1 py-12  grid grid-cols-1  w-full  mb-1">
-        <a href="https://github.com/kush-team" target="_blank"
-          class="font-mono  flex justify-start text-center p-3 items-center text-left font-bold  hover:bg-gray-800 text-white">
-          <div class="pr-2 flex justify-center items-center" href="https://github.com/kush-team" target="_blank">
-            <img class="w-4 h-4" src="assets/GitHub-Mark-Light-32px.png" />
-          </div>
-          <span class="text-gray-100 leading-tight">Kush Team</span>
-        </a>
-        <a href="https://www.buymeacoffee.com/kushteam" target="_blank"
-          class="font-mono bg-orange-500 hover:bg-orange-600 flex justify-start text-center p-2 items-center text-left font-bold  text-white">
-          <div class="pr-2 flex justify-center items-center" href="https://www.buymeacoffee.com/kushteam"
-            target="_blank">
-            <img class="w-4 h-4" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" />
-          </div>
-          <span class="text-gray-900 leading-tight">Buy us a coffee</span>
-        </a>
-      </div>
+        <div class="flex items-center justify-center pr-2" href="https://github.com/kush-team" target="_blank">
+          <img class="w-4 h-4" src="assets/GitHub-Mark-Light-32px.png" />
+        </div>
+      </a>
+      <a href="https://www.buymeacoffee.com/kushteam" target="_blank"
+        class="flex items-center justify-between p-2 py-3 font-mono font-bold text-left text-center text-white bg-yellow-500 hover:bg-yellow-600">
+        <span class="text-sm leading-tight text-gray-900">Buy us a coffee</span>
+
+        <div class="flex items-center justify-center pr-2" href="https://www.buymeacoffee.com/kushteam" target="_blank">
+          <img class="w-4 h-4" src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" />
+        </div>
+      </a>
 
     </div>
   </div>
-  <div class="w-full bg-gray-900 pt-5 overflow-hidden">
-    <ngx-monaco-editor style="height: 97vh; width: 100%" class="overflow-hidden" [options]="editorOptions" [(ngModel)]="code"
-      automaticLayout="true"></ngx-monaco-editor>
+  <div class="w-full pt-5 overflow-hidden bg-gray-900">
+    <ngx-monaco-editor style="height: 96vh; width: 100%" class="overflow-hidden" [options]="editorOptions"
+      [(ngModel)]="code" automaticLayout="true"></ngx-monaco-editor>
   </div>
 </div>
