@@ -20,31 +20,39 @@
 </div>
 
 <div *ngIf="theme" class="relative max-h-screen overflow-hidden">
-  <div class="absolute bottom-0 right-0 z-50 flex items-center justify-center w-full px-4 transition-all duration-200 opacity-75 hover:opacity-100"
+  <div
+    class="absolute bottom-0 right-0 z-50 flex items-center justify-center w-full transition-all duration-200 opacity-75 hover:opacity-100"
     style="background: rgba(17, 24, 39, .8)">
-    <div class="flex items-center justify-end py-3 pt-2 ">
-      <button (click)="openCodeEditor()"
-        class="w-5 h-5 mr-5 transition-all duration-500 transform outline-none opacity-75 hover:opacity-100" [ngClass]="{
+    <div class="flex w-full pl-6 ml-32">
+      <div class="flex items-center justify-center w-full py-3 pt-2 transform -translate-x-2 ">
+        <button (click)="openCodeEditor()"
+          class="flex items-center mr-6 text-white transition-all duration-500 transform outline-none opacity-75 hover:opacity-100"
+          [ngClass]="{
           'opacity-100': isOpen
         }">
-        <svg xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 62.3 62.3">
-          <path d="M9 2h44.2c4 0 7.1 3.2 7.1 7v44.2c0 4-3.2 7.1-7 7.1H9a7 7 0 01-7.1-7V9C2 5 5.2 2 9 2z" fill="none"
-            stroke="#fff" stroke-width="4" stroke-miterlimit="10" />
-          <path d="M31.2 60.3V2h22c4 0 7.1 3.2 7.1 7v44.2c0 4-3.2 7.1-7 7.1H31.1z" fill="#fff" />
-        </svg>
-      </button>
-      <button (click)="closeCodeEditor()"
-        class="w-5 h-5 transition-all duration-500 transform outline-none opacity-50 hover:opacity-100" [ngClass]="{
+          <span class="inline-block pr-2 mr-1 font-mono">view source</span>
+          <svg class="w-5 h-5 " xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 62.3 62.3">
+            <path d="M9 2h44.2c4 0 7.1 3.2 7.1 7v44.2c0 4-3.2 7.1-7 7.1H9a7 7 0 01-7.1-7V9C2 5 5.2 2 9 2z" fill="none"
+              stroke="#fff" stroke-width="4" stroke-miterlimit="10" />
+            <path d="M31.2 60.3V2h22c4 0 7.1 3.2 7.1 7v44.2c0 4-3.2 7.1-7 7.1H31.1z" fill="#fff" />
+          </svg>
+        </button>
+        <button (click)="closeCodeEditor()"
+          class="flex items-center text-white transition-all duration-500 transform outline-none opacity-50 hover:opacity-100"
+          [ngClass]="{
           'opacity-100': !isOpen
         }">
-        <svg xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 62.3 62.3">
-          <path d="M53.2 60.3H9.1a7 7 0 01-7.1-7V9C2 5 5.2 2 9 2h44.2c4 0 7.1 3.2 7.1 7v44.2c0 4-3.1 7.1-7 7.1z"
-            fill="#fff" stroke="#fff" stroke-width="4" stroke-miterlimit="10" />
-        </svg>
-      </button>
+          <svg class="w-5 h-5 " xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox="0 0 62.3 62.3">
+            <path d="M53.2 60.3H9.1a7 7 0 01-7.1-7V9C2 5 5.2 2 9 2h44.2c4 0 7.1 3.2 7.1 7v44.2c0 4-3.1 7.1-7 7.1z"
+              fill="#fff" stroke="#fff" stroke-width="4" stroke-miterlimit="10" />
+          </svg>
+          <span class="inline-block pl-2 mr-1 font-mono">full view</span>
+        </button>
+      </div>
+      <a href="/" target="_blank" class="items-center justify-center hidden w-40 font-mono text-white bg-blue-900 md:flex">Open brownser</a>
     </div>
   </div>
-  <div class="relative flex w-full h-screen overflow-hidden" >
+  <div class="relative flex w-full h-screen mr-12 overflow-hidden">
     <as-split direction="horizontal" (dragEnd)="splitResize($event)" [gutterSize]=4 [useTransition]=true>
       <as-split-area [size]="codeSize">
         <app-playground [theme]="theme" [themes]="themeList"></app-playground>
